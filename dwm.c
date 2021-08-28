@@ -675,6 +675,10 @@ createmon(void)
 	m->nmaster = nmaster;
 	m->showbar = showbar;
 	m->topbar = topbar;
+	m->gappih = gappih;
+	m->gappiv = gappiv;
+	m->gappoh = gappoh;
+	m->gappov = gappov;
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
@@ -771,8 +775,8 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-	int x, w;
-	int boxs = drw->fonts->h / 9;
+	int x, w = 0;
+	// int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
@@ -784,7 +788,7 @@ drawbar(Monitor *m)
         char tmp;
  
         drw_setscheme(drw, scheme[SchemeNorm]);
-        x = m->ww - wstext - sp; // maybe with '- RSPAD'
+        x = m->ww - wstext - sp - 2 * RSPAD; // maybe with '- RSPAD'
         drw_rect(drw, x, 0, LSPAD, bh, 1, 1); x += LSPAD; /* to keep left padding clean */
         for (;;) {
             if ((unsigned char)*stc >= ' ') {
