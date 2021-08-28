@@ -12,6 +12,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int vertpad			= 10;		/* vertical padding of bar */
 static const int sidepad			= 10;		/* horizontal padding of bar */
+static const int horizpadbar		= 2;		/* horizontal padding of statusbar */
+static const int vertpadbar			= 0;		/* vertical padding for statusbar */
 static const Bool viewontag			= True;		/* Switch view on tag switch */
 static const char *fonts[]          = { "JetBrains Mono:style=Bold:size=13" };
 static const char dmenufont[]       = "JetBrains Mono:style=Bold:size=16";
