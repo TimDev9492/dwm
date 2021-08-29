@@ -63,7 +63,8 @@ static const Rule rules[] = {
 	{ "Signal",  		NULL,  	 	NULL,       		1 << 7,        	0,           	1,			0 },
 	{ "FreeTube",  		NULL,  	 	NULL,       		1 << 9,        	0,           	1,			0 },
 	{ "Yad",  		    NULL,  	 	NULL,       		0,        	    1,           	0,			0 },
-	{ NULL,	      		NULL,		"Picture in picture", 	0,	    	1,	 			1,			0 },
+	{ "scrcpy",	      	NULL,		NULL, 	            0,	    	    1,	 			0,			0 },
+	{ NULL,	      		NULL,		"Picture in picture", 	0,	    	1,	 			0,			0 },
 	{ NULL,       		NULL,   	"scratchpad",   	0,            	1,           	-1,       	's' },
 };
 
@@ -120,6 +121,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_g,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
+    { MODKEY|ShiftMask,		        XK_s,	   spawn,	       SHCMD("maim -s -u | xclip -selection clipboard -t image/png -i") },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -127,7 +129,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_a,  togglealwaysontop, {0} },
+	{ MODKEY,                       XK_a,      togglealwaysontop, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },

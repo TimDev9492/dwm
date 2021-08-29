@@ -472,9 +472,9 @@ buttonpress(XEvent *e)
             arg.ui = 1 << i;
         } else if (ev->x < ble)
             click = ClkLtSymbol;
-        else if (ev->x < selmon->ww - wstext)
-            click = ClkStatusText;
-        else if ((x = selmon->ww - RSPAD - ev->x) > 0 && (x -= wstext - LSPAD - RSPAD) <= 0) {
+        else if (ev->x < selmon->ww - wstext - sp - RSPAD)
+            click = ClkWinTitle;
+        else if ((x = selmon->ww - ev->x - RSPAD - sp) > 0 && (x -= wstext - LSPAD - RSPAD) <= 0) {
             updatedwmblockssig(x);
         click = ClkStatusText;
     } else
@@ -1698,7 +1698,10 @@ setup(void)
 	/* init bars */
 	updatebars();
 	updatestatus();
-	updatebarpos(selmon);
+	Monitor *m;
+	for (m = mons; m; m = m->next) {
+		updatebarpos(m);
+	}
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
@@ -2085,36 +2088,36 @@ updateclientlist()
 void
 updatedwmblockssig(int x)
 {
-        char *sts = stexts;
-        char *stp = stexts;
-        char tmp;
+    char *sts = stexts;
+    char *stp = stexts;
+    char tmp;
 
-        while (*sts != '\0') {
-                if ((unsigned char)*sts >= ' ') {
-                        sts++;
-                        continue;
+    while (*sts != '\0') {
+            if ((unsigned char)*sts >= ' ') {
+                sts++;
+                continue;
+            }
+            tmp = *sts;
+            *sts = '\0';
+            x += TTEXTW(stp);
+            *sts = tmp;
+            if (x > 0) {
+                if (tmp == DELIMITERENDCHAR)
+                    break;
+                if (!selmon->statushandcursor) {
+                    selmon->statushandcursor = 1;
+                    XDefineCursor(dpy, selmon->barwin, cursor[CurHand]->cursor);
                 }
-                tmp = *sts;
-                *sts = '\0';
-                x += TTEXTW(stp);
-                *sts = tmp;
-                if (x > 0) {
-                        if (tmp == DELIMITERENDCHAR)
-                                break;
-                        if (!selmon->statushandcursor) {
-                                selmon->statushandcursor = 1;
-                                XDefineCursor(dpy, selmon->barwin, cursor[CurHand]->cursor);
-                        }
-                        dwmblockssig = tmp;
-                        return;
-                }
-                stp = ++sts;
-        }
-        if (selmon->statushandcursor) {
-                selmon->statushandcursor = 0;
-                XDefineCursor(dpy, selmon->barwin, cursor[CurNormal]->cursor);
-        }
-        dwmblockssig = 0;
+                dwmblockssig = tmp;
+                return;
+            }
+            stp = ++sts;
+    }
+    if (selmon->statushandcursor) {
+        selmon->statushandcursor = 0;
+        XDefineCursor(dpy, selmon->barwin, cursor[CurNormal]->cursor);
+    }
+    dwmblockssig = 0;
 }
 
 int
