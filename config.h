@@ -52,22 +52,21 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      		instance    	title			tags mask		isfloating		monitor 	scratch key */
-	{ "Gimp",     		NULL,   	NULL,       		0,     	       	1,           	-1,			0 },
-	{ "firefox",  		NULL,   	NULL,       		1 << 4,       	0,           	-1,			0 },
-	{ "discord",  		NULL,   	NULL,       		1 << 2,       	0,           	2,			0 },
-	{ "lunarclient",	NULL,   	NULL,   			1 << 3,    		0,           	0,			0 },
-	{ "MultiMC5",  		NULL,   	NULL,       		1 << 3,      	0,           	0,			0 },
-	{ "Steam",  		NULL,		NULL,       		1 << 3,         0,           	-1,			0 },
-	{ "KeePassXC",  	NULL,   	NULL,       		1 << 6,     	0,           	-1,			0 },
-	{ "Signal",  		NULL,  	 	NULL,       		1 << 7,        	0,           	1,			0 },
-	{ "FreeTube",  		NULL,  	 	NULL,       		1 << 9,        	0,           	1,			0 },
-	{ "Yad",  		    NULL,  	 	NULL,       		0,        	    1,           	0,			0 },
-	{ "scrcpy",	      	NULL,		NULL, 	            0,	    	    1,	 			0,			0 },
-	{ NULL,	      		NULL,		"Picture in picture", 	0,	    	1,	 			0,			0 },
-	{ NULL,       		NULL,   	"scratchpad",   	0,            	1,           	-1,       	's' },
+	/* class      		instance    	title			tags mask		iscentered		isfloating		monitor 	scratch key */
+	{ "Gimp",     		NULL,   	NULL,       		0,     	       	0,				1,           	-1,			0 },
+	{ "firefox",  		NULL,   	NULL,       		1 << 4,       	0,				0,           	-1,			0 },
+	{ "discord",  		NULL,   	NULL,       		1 << 2,       	0,				0,           	2,			0 },
+	{ "lunarclient",	NULL,   	NULL,   			1 << 3,    		0,				0,           	0,			0 },
+	{ "MultiMC5",  		NULL,   	NULL,       		1 << 3,      	1,				1,           	0,			0 },
+	{ "Steam",  		NULL,		NULL,       		1 << 3,         0,				0,           	-1,			0 },
+	{ "KeePassXC",  	NULL,   	NULL,       		0,     			1,				0,           	-1,			0 },
+	{ "Signal",  		NULL,  	 	NULL,       		1 << 7,        	0,				0,           	1,			0 },
+	{ "FreeTube",  		NULL,  	 	NULL,       		1 << 9,        	0,				0,           	1,			0 },
+	{ "Yad",  		    NULL,  	 	NULL,       		0,        	    0,				1,           	0,			0 },
+	{ "scrcpy",	      	NULL,		NULL, 	            0,	    	    0,				1,	 			0,			0 },
+	{ NULL,	      		NULL,		"Picture in picture", 	0,	    	0,				1,	 			0,			0 },
+	{ NULL,       		NULL,   	"scratchpad",   	0,            	1,				1,           	-1,       	's' },
 };
-
 
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
