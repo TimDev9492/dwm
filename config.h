@@ -99,10 +99,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "10", "-g", "5", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 
 /* First arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "alacritty", "-t", "scratchpad", NULL};
+static const char *scratchpadcmd[] = {"s", "urxvt", "-title", "scratchpad", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -168,4 +168,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
