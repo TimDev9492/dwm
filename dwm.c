@@ -472,13 +472,13 @@ buttonpress(XEvent *e)
             arg.ui = 1 << i;
         } else if (ev->x < ble)
             click = ClkLtSymbol;
-        else if (ev->x < selmon->ww - wstext - sp - RSPAD)
-            click = ClkWinTitle;
-        else if ((x = selmon->ww - ev->x - RSPAD - sp) > 0 && (x -= wstext - LSPAD - RSPAD) <= 0) {
+        // else if (ev->x < selmon->ww - wstext - sp - RSPAD)
+        //     click = ClkWinTitle;
+        else if ((x = selmon->ww - ev->x - LSPAD - 2 * RSPAD - sp) > 0 && (x -= wstext - LSPAD - RSPAD) <= 0) {
             updatedwmblockssig(x);
-        click = ClkStatusText;
-    } else
-        return;
+        	click = ClkStatusText;
+    	} else
+        	return;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
@@ -1236,7 +1236,7 @@ motionnotify(XEvent *e)
                         focus(NULL);
                 }
                 mon = m;
-        } else if (ev->window == selmon->barwin && (x = selmon->ww - RSPAD - ev->x) > 0
+        } else if (ev->window == selmon->barwin && (x = selmon->ww - LSPAD - 2 * RSPAD - ev->x - sp) > 0
                                                 && (x -= wstext - LSPAD - RSPAD) <= 0)
                 updatedwmblockssig(x);
         else if (selmon->statushandcursor) {
