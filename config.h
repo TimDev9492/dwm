@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 16;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 16;       /* vert inner gap between windows */
@@ -15,56 +15,61 @@ static const int sidepad			= 16;		/* horizontal padding of bar */
 static const int horizpadbar		= 0;		/* horizontal padding of statusbar */
 static const int vertpadbar			= 12;		/* vertical padding for statusbar */
 static const Bool viewontag			= True;		/* Switch view on tag switch */
-static const char *fonts[]          = { "JetBrains Mono:style=Bold:size=13" };
+static const char *fonts[]          = { 
+		"JetBrains Mono:style=Bold:size=13", 
+		"Font Awesome 6 Brands:size=12",
+		"Font Awesome 6 Free:style=Solid:size=12",
+		"Font Awesome v4 Compatibility:size=12",
+ 	};
 static const char dmenufont[]       = "JetBrains Mono:style=Bold:size=16";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col1[]            = "#ffffff";
-static const char col2[]            = "#ffffff";
-static const char col3[]            = "#ffffff";
-static const char col4[]            = "#ffffff";
-static const char col5[]            = "#ffffff";
-static const char col6[]            = "#ffffff";
+
+#include "/home/tim/.config/colorscheme/colors.h"
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
-       SchemeCol5, SchemeCol6, SchemeSel }; /* color schemes */
+       SchemeCol5, SchemeCol6, SchemeCol7, SchemeSel }; /* color schemes */
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm]  = { col_gray3, col_gray1, col_gray2 },
-	[SchemeCol1]  = { col1,      col_gray1, col_gray2 },
-	[SchemeCol2]  = { col2,      col_gray1, col_gray2 },
-	[SchemeCol3]  = { col3,      col_gray1, col_gray2 },
-	[SchemeCol4]  = { col4,      col_gray1, col_gray2 },
-	[SchemeCol5]  = { col5,      col_gray1, col_gray2 },
-	[SchemeCol6]  = { col6,      col_gray1, col_gray2 },
-	[SchemeSel]   = { col_gray4, col_cyan,  col_cyan  },
+	/*                fg         	bg         		border   */
+	[SchemeNorm]  = { inactive_fg,	inactive_bg, 	inactive_border },
+	[SchemeCol1]  = { col1,      	inactive_bg, 	inactive_border },
+	[SchemeCol2]  = { col2,      	inactive_bg, 	inactive_border },
+	[SchemeCol3]  = { col3,      	inactive_bg, 	inactive_border },
+	[SchemeCol4]  = { col4,      	inactive_bg, 	inactive_border },
+	[SchemeCol5]  = { col5,      	inactive_bg, 	inactive_border },
+	[SchemeCol6]  = { col6,      	inactive_bg, 	inactive_border },
+	[SchemeCol7]  = { col7,      	inactive_bg, 	inactive_border },
+	[SchemeSel]   = { active_fg, 	active_bg,  	active_border  	},
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      		instance    	title			tags mask		switchtotag		iscentered		isfloating		monitor 	scratch key */
+	/* class      		instance    title				tags mask		switchtotag		iscentered		isfloating		monitor 	scratchkey */
 	{ "Gimp",     		NULL,   	NULL,       		0,     	       	0,				0,				1,           	-1,			0 },
 	{ "firefox",  		NULL,   	NULL,       		1 << 4,       	1,				0,				0,           	-1,			0 },
-	{ "discord",  		NULL,   	NULL,       		1 << 2,       	1,				0,				0,           	2,			0 },
-	{ "lunarclient",	NULL,   	NULL,   			1 << 3,    		1,				0,				0,           	0,			0 },
+	{ "Chromium",  		NULL,   	NULL,       		1 << 4,       	1,				0,				0,           	-1,			0 },
+	{ "discord",  		NULL,   	NULL,       		1 << 2,       	1,				1,				0,           	2,			0 },
+	{ "lunarclient",	NULL,   	NULL,   			1 << 3,    		1,				1,				1,           	0,			0 },
+	{ "lunarclient",	NULL,   	"Launcher Update",  1 << 3,    		1,				1,				1,           	0,			0 },
 	{ "MultiMC5",  		NULL,   	NULL,       		1 << 3,      	1,				1,				1,           	0,			0 },
 	{ "Steam",  		NULL,		NULL,       		1 << 3,         1,				0,				0,           	-1,			0 },
-	{ "KeePassXC",  	NULL,   	NULL,       		0,     			0,				1,				0,           	-1,			0 },
+	{ "KeePassXC",  	NULL,   	NULL,       		0,     			0,				1,				1,           	-1,			0 },
 	{ "Signal",  		NULL,  	 	NULL,       		1 << 7,        	1,				0,				0,           	1,			0 },
-	{ "FreeTube",  		NULL,  	 	NULL,       		1 << 9,        	1,				0,				0,           	1,			0 },
+	{ "localtube",  	NULL,  	 	NULL,       		0,        	    0,				0,				0,           	-1,			0 },
 	{ "Yad",  		    NULL,  	 	NULL,       		0,        	    0,				0,				1,           	0,			0 },
 	{ "scrcpy",	      	NULL,		NULL, 	            0,	    	    0,				0,				1,	 			0,			0 },
+	{ "obs",	      	NULL,		NULL, 	            1 << 9,	        0,				0,				0,	 		    2,			0 },
+	{ "Gcolor3",	    NULL,		NULL, 	            0,	    	    0,				1,				1,	 			0,			0 },
+	{ "Thunar", 	    NULL,		NULL, 	            0,	    	    0,				1,				1,	 			0,			0 },
+	{ "mpv",	        NULL,		NULL, 	            0,	    	    0,				1,				1,	 			0,			0 },
+	{ "bitcoin-qt",     NULL,		NULL, 	            0,	    	    0,				1,				1,	 			-1,			0 },
 	{ NULL,	      		NULL,		"Picture in picture", 	0,	    	0,				0,				1,	 			0,			0 },
+	{ NULL,	      		NULL,		"File Operation Progress",  0,	    0,				1,				1,	 			0,			0 },
 	{ NULL,       		NULL,   	"scratchpad",   	0,            	0,				1,				1,           	-1,       	's' },
 };
 
@@ -97,15 +102,29 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "10", "-g", "5", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", inactive_bg, "-nf", inactive_fg, "-sb", active_border, "-sf", active_fg, NULL };
+static const char hplist[] = "codium,vscodium,chromium,gimp,thunderbird,signal-desktop,discord,obs,lunarclient,multimc,spt-init,keepassxc-sync,freetube,idea,localtube";
+static const char *dmenucmd[] = { "dmenu_run", "-hp", hplist, NULL };
+static const char *termcmd[]  = { "st", NULL };
+static const char *appbarcmd[]  = { "eww", "open", "appbar", NULL };
+
+#include "selfrestart.c"
+#include <X11/XF86keysym.h>
 
 /* First arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "urxvt", "-title", "scratchpad", NULL};
+static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", "-g", "110x32", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ MODKEY,                       XK_v,      spawn,          {.v = appbarcmd } },
+	{ 0,                            XF86XK_AudioMute,spawn,    SHCMD("amixer set Master toggle && sigdwmblocks 6") },
+	{ 0,                            XF86XK_AudioRaiseVolume,spawn,SHCMD("/home/tim/.local/bin/dwmb/sb-music/set-volume.sh +5% && sigdwmblocks 9") },
+	{ 0,                            XF86XK_AudioLowerVolume,spawn,SHCMD("/home/tim/.local/bin/dwmb/sb-music/set-volume.sh -5% && sigdwmblocks 9") },
+	//{ 0,                            XF86XK_AudioRaiseVolume,spawn,SHCMD("sptvolume=$(spt playback -f %v) && spt playback --volume \"$(((sptvolume += 5) > 100 ? 100 : (sptvolume < 0 ? 0 : sptvolume)))\"") },
+	//{ 0,                            XF86XK_AudioLowerVolume,spawn,SHCMD("sptvolume=$(spt playback -f %v) && spt playback --volume \"$(((sptvolume -= 5) > 100 ? 100 : (sptvolume < 0 ? 0 : sptvolume)))\"") },
+	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("spt playback -p") },
+	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("spt playback -n") },
+	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("spt playback -t") },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
@@ -121,6 +140,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
     { MODKEY|ShiftMask,		        XK_s,	   spawn,	       SHCMD("maim -s -u | xclip -selection clipboard -t image/png -i") },
+    { MODKEY,		                XK_c,	   spawn,	       SHCMD("gcolor3 | tr -d '\n' | xclip -selection clipboard") },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -145,7 +165,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
     TAGKEYS(                        XK_0,                      9)
+	{ MODKEY|ShiftMask,             XK_o,      self_restart,   {0} },
+	// { MODKEY|ShiftMask,				XK_o,	   quit,		   {1} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_Escape, spawn,          SHCMD("byebye") },
 };
 
 /* button definitions */
